@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-
 
 
 /**
@@ -18,58 +18,56 @@ import java.util.ArrayList;
 @WebServlet({"/forum"})
 public class ForumServlet extends HttpServlet {
 
-
-    private ArrayList <Message> messages = new ArrayList();
-
-
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    static void TableCod(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
         req.setCharacterEncoding( "UTF-8" );
         resp.setCharacterEncoding( "UTF-8" );
         resp.setContentType( "text/html" );
+    }
 
+    private ArrayList <Message> messages = new ArrayList();
 
-        String nick = req.getParameter( "nickname" );
-        String message = req.getParameter( "messageParam" );
-        Message date = new Message();
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        TableCod( req, resp );
+        parametr( req, resp, false );
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        TableCod( req, resp );
+        parametr( req, resp, true );
+    }
 
-        if (message != null) {
-
-            messages.add( 0, new Message( nick, message, date.getDateForum() ) );
-        }
-
-        //3
+    public void TableChat(HttpServletResponse resp, String nick) throws IOException {
         PrintWriter out = resp.getWriter();
         out.println( "<h3>Ваш ник - " + nick + "<h3>" );
         out.println( "Сообщения: " );
-
 
         for (int i = 0; i < messages.size(); i++) {
             out.println( "<h4>" + messages.get( i ).getAuthor() +
                     " : " + messages.get( i ).getText() + " " + messages.get( i ).getDateForum() + "<h4>" );
         }
-
         out.println( "<hr>" );
-
-
-//        String str = "Миша сказал: \"Влад, ты разобрался?\"";
-
-//        nick
-        //4
-        out.println( "<form action=\"/forum\">" );
+        out.println( "<form action=\"/forum\" method=\"post\">" );
         out.println( "<h4>" + nick + " : </h4>" );
         out.println( "<input type=\"text\" name=\"messageParam\"/>" );
         out.println( "<input type=\"hidden\" value=\"" + nick + "\" name=\"nickname\"/>" );
-        // out.println("<input type=\"hidden\" value=\"" + date+ "\" name=\"dateForum\"/>");
         out.println( "<input type=\"submit\" value=\"send\"/>" );
         out.println( "</form>" );
         out.println( "<hr>" );
-        //1
-
-
     }
 
-}
+    public void parametr(HttpServletRequest req, HttpServletResponse resp, boolean method) throws IOException {
+        String nick = req.getParameter( "nickname" );
+        String message = req.getParameter( "messageParam" );
+        Message date = new Message();
 
+        if (method == true) {
+            if (com.belhard.utils.StringUtils.isBlank( message ) == false) {
+
+                messages.add( 0, new Message( nick, message, date.getDateForum() ) );
+            }
+        }
+        TableChat( resp, nick );
+    }
+}
