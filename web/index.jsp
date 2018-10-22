@@ -13,6 +13,7 @@
 <body>
 <form action="/forum" >
     <input type="text" placeholder="nick here please" name="nickname">
+    <input type="hidden" value="allChat" name="thisGroup">
     <input type="submit" value="send">
 </form>
 </body>
