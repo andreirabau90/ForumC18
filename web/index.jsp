@@ -11,10 +11,15 @@
     <title>NickName</title>
 </head>
 <body>
-<form action="/forum" >
+<form action="/forum1" >
     <input type="text" placeholder="nick here please" name="nickname">
+    <input type="password" placeholder="password" name="pass">
     <input type="hidden" value="allChat" name="thisGroup">
-    <input type="submit" value="send">
+    <input type="submit" value="registr" name="registr" aria-valuetext="true" >
+    <input type="submit" value="send" name="registr" aria-valuetext="false" >
+
 </form>
+
+<h1>${error}</h1>
 </body>
 </html>

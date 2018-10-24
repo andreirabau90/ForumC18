@@ -7,8 +7,7 @@
 --%>
 <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"
-           prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 
 <head>
@@ -19,7 +18,6 @@
 <h3>Ваш ник - ${nick}</h3>
 <h3>Ваша группа - ${myGroup}</h3>
 Сообщения:
-
 
 <table id="chat">
     <c:forEach var="message" items="${mes}">
@@ -39,7 +37,6 @@
         $('#chat_id').submit();
         timerId = setTimeout(tick, 5000);
     }, 5000);
-
 </script>
 <form id="chat_id" action="forum" method="post">
     <input id="messageparam" type="text" name="messageParam">
