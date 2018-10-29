@@ -1,47 +1,27 @@
 package servlets;
 
-import javax.servlet.http.HttpServlet;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-@XmlRootElement
-@XmlType(propOrder = {"nick","password"})
-public class Users extends HttpServlet {
-    private String nick;
-    private String password;
 
+import java.util.ArrayList;
+import java.util.List;
 
-    public Users(String nick, String password) {
-        this.nick = nick;
-        this.password = password;
-    }
-    @XmlElement
-    public String getNick() {
-        return nick;
-    }
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-    @XmlElement
-    public String getPassword() {
-        return password;
-    }
-
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Users() {
-    }
+@XmlRootElement(name = "Users")
+public class Users {
+    List<User> usersList=new ArrayList<>();
 
     @Override
     public String toString() {
         return "Users{" +
-                "nick='" + nick + '\'' +
-                ", password='" + password + '\'' +
+                "usersList=" + usersList +
                 '}';
     }
+
+    public  List<User> getUsersList() {
+        return usersList;
+    }
+    @XmlElement(name = "user")
+    public void setUsersList(List<User> usersList) {
+        this.usersList = usersList;
+    }
 }
-
-

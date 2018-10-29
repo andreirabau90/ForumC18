@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<users>
-    <nick>andr</nick>
-    <password>andr</password>
-</users>
+<Users>
+    <user>
+        <nick>andr</nick>
+        <password>andr</password>
+    </user>
+    <user>
+        <nick>clon</nick>
+        <password>1234</password>
+    </user>
+</Users>
