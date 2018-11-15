@@ -50,7 +50,7 @@
         <%--$.ajax({--%>
             <%--type: "POST",--%>
             <%--url: "/forum",--%>
-            <%--data: {messageParam:$('#memessageparam'),nickname:$('#nickname'),thisGroup:$('#thisgroup')},--%>
+            <%--data: --%>
             <%--success: function(dat)      {--%>
                 <%--alert('1');--%>
                 <%--alert('2');--%>

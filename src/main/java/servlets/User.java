@@ -1,9 +1,8 @@
 package servlets;
 
-import javax.servlet.http.HttpServlet;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+
 @XmlRootElement(name = "User")
 public class User  {
     private String nick;

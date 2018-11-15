@@ -1,4 +1,4 @@
-package com.belhard.utils;
+package utils;
 
 public final class StringUtils {
 

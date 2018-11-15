@@ -8,7 +8,7 @@ import java.util.List;
 
 @XmlRootElement(name = "Users")
 public class Users {
-    List<User> usersList=new ArrayList<>();
+    List<User> usersList=new ArrayList<User>();
 
     @Override
     public String toString() {
