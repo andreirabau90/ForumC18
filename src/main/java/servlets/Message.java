@@ -1,7 +1,4 @@
 package servlets;
-
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -22,13 +19,6 @@ public class Message {
     }
 
     private String dateForum=String.format("%1$tB  %1$tm %1$tT",date);
-
-    public Message(String author, String text, String dateForum,String group) {
-        this.author = author;
-        this.text = text;
-        this.group = group;
-        this.dateForum = dateForum;
-    }
 
     public Message(String author, String text, String dateForum) {
         this.author = author;

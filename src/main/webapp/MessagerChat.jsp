@@ -24,9 +24,9 @@
         <c:set var="com" value="${myGroup}"></c:set>
         <c:if test="${message.group==com}">
             <tr id='2'>
-                    <td><c:out value="${message.author}"/></td>
-                    <td><c:out value="${message.text}"/></td>
-                    <td><c:out value="${message.dateForum}"/></td>
+                <td><c:out value="${message.author}"/></td>
+                <td><c:out value="${message.text}"/></td>
+                <td><c:out value="${message.dateForum}"/></td>
             </tr>
         </c:if>
     </c:forEach>
@@ -50,26 +50,25 @@
         <%--$.ajax({--%>
             <%--type: "POST",--%>
             <%--url: "/forum",--%>
-            <%--data: --%>
-            <%--success: function(dat)      {--%>
+            <%--data: {name: 'Andrey'},--%>
+            <%--success: function (dat) {--%>
                 <%--alert('1');--%>
                 <%--alert('2');--%>
-            <%--for(i=0;i< dat.length;i++){--%>
-                <%--alert('3');--%>
-            <%--&lt;%&ndash;result = '<td><c:out value="${message.author}"/></td>' +&ndash;%&gt;--%>
-                <%--&lt;%&ndash;'<td><c:out value="${message.text}"/></td>' +&ndash;%&gt;--%>
-                <%--&lt;%&ndash;' <td><c:out value="${message.dateForum}"/></td>';&ndash;%&gt;--%>
-                <%--result=message[i];--%>
-            <%--$('#2').html($('#2')).html() + result;--%>
+                <%--for (i = 0; i < dat.length; i++) {--%>
+                    <%--alert('3');--%>
+                    <%--result = '<td><c:out value="${message.author}"/></td>' +--%>
+                        <%--'<td><c:out value="${message.text}"/></td>' +--%>
+                        <%--' <td><c:out value="${message.dateForum}"/></td>';--%>
+                    <%--result = message[i];--%>
+                    <%--$('#2').html($('#2')).html() + result;--%>
 
-            <%--};--%>
-        <%--}--%>
-            <%--});--%>
+                <%--}--%>
+                <%--;--%>
+            <%--}--%>
+        <%--});--%>
     <%--});--%>
 
 <%--</script>--%>
-
-
 
 
 <form action="forum" method="post">

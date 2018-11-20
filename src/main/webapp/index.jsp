@@ -11,9 +11,10 @@
     <title>NickName</title>
 </head>
 <body>
-<form action="/forum1" >
+<form action="check" >
     <input type="text" placeholder="nick here please" name="nickname">
     <input type="password" placeholder="password" name="pass">
+    <input type="hidden" placeholder="password" name="checkpass" value="null">
     <input type="hidden" value="allChat" name="thisGroup">
     <input type="submit" value="send" >
 </form>

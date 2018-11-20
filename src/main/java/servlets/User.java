@@ -2,8 +2,9 @@ package servlets;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name = "User")
+import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
+@XmlRootElement(name = "user")
 public class User  {
     private String nick;
     private String password;
@@ -13,14 +14,14 @@ public class User  {
         this.nick = nick;
         this.password = password;
     }
-    @XmlElement
+//    @XmlElement
     public String getNick() {
         return nick;
     }
     public void setNick(String nick) {
         this.nick = nick;
     }
-    @XmlElement
+//    @XmlElement
     public String getPassword() {
         return password;
     }
@@ -40,6 +41,8 @@ public class User  {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+
 }
 
 
