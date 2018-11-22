@@ -20,7 +20,7 @@ import static com.sun.org.apache.xerces.internal.utils.SecuritySupport.getResour
 public class CheckPass extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, NullPointerException {
-
+NewFile.usersFile();
         File file = new File("C:\\Users\\Андрей\\ForumC18\\ForumC18\\src\\main\\resources\\UsersList.xml");
         if (!file.exists()) {
             file.createNewFile();
@@ -29,72 +29,54 @@ public class CheckPass extends HttpServlet {
         String password = req.getParameter("pass");
         String checkPass = req.getParameter("checkpass");
         Users users = new Users();
-        List<User> listUser ;
+        List<User> listUser;
         User newUser = new User(nick, password);
-            try {
-                JAXBContext uncontext = JAXBContext.newInstance(Users.class);
-                Unmarshaller unmarshaller = uncontext.createUnmarshaller();
-                users = (Users) unmarshaller.unmarshal(file);
-            } catch (JAXBException e) {
-                e.printStackTrace();
-            }
-            listUser = users.getUsersList();
+        try {
+            JAXBContext uncontext = JAXBContext.newInstance(Users.class);
+            Unmarshaller unmarshaller = uncontext.createUnmarshaller();
+            users = (Users) unmarshaller.unmarshal(file);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        listUser = users.getUsersList();
+        if (!(nick.trim().length()==0||password.trim().length()==0)) {
+            String error = "Ошибка авторизации";
+            System.out.println(error.length());
             if (checkPass.equals("null")) {
-                for (User user : listUser)
+                for (User user : listUser) {
                     if (nick.equals(user.getNick()) && password.equals(user.getPassword())) {
                         req.getServletContext().setAttribute("nickname", nick);
                         req.getRequestDispatcher("/forum").forward(req, resp);
-
-
-
-                    } else {
-                        String error = "Ощибка авторизации!!!";
-                        req.getServletContext().setAttribute("error", error);
-                        req.getRequestDispatcher("index.jsp").forward(req, resp);
+                        break;
                     }
-            } else if (password.equals(checkPass)) {
-                if (listUser.size() != 0) {
-                    for (User user : listUser)
-                        if (nick.equals(user.getNick())) {
-                            String error = "Пользователь с таким ником уже зарегистрирован!!!";
-                            req.getServletContext().setAttribute("error", error);
-                            req.getRequestDispatcher("index.jsp").forward(req, resp);
-
-                        }
                 }
-                if (nick != null) {
+            }
+            if (password.equals(checkPass)) {
+                boolean result = false;
+                for (User user : listUser) {
+                    if (nick.equals(user.getNick())) {
+                        result = true;
+                        error = "Пользователь с таким ником уже зарегистрирован!!!";
+                        break;
+                    }
+                }
+                if (!result) {
                     users.setUsersList(newUser);
                     try {
-                        JAXBContext context = JAXBContext.newInstance(Users.class);
-                        Marshaller marshaller = context.createMarshaller();
-                        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                        marshaller.marshal(users, file);
-                        String error = "Регистрация прошла успешна!!!";
-                        req.getServletContext().setAttribute("error", error);
-                        req.getRequestDispatcher("index.jsp").forward(req, resp);
+                        MyMarshaller.marsh(users);
                     } catch (JAXBException e) {
-                        System.out.println("NO work");
+                        e.printStackTrace();
                     }
+                    error = "Пользователь успешно зарегистрирован!!!";
+                } else if (error.length() < 20 && !checkPass.equals("null")) {
+                    error = "Ошибка регистрации!";
                 }
-            } else {
-                String error = "Ошибка регистрации!!!";
-                req.getServletContext().setAttribute("error", error);
-                req.getRequestDispatcher("index.jsp").forward(req, resp);
             }
-
+            req.getServletContext().setAttribute("error", error);
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        }else {
+            req.getServletContext().setAttribute("error", "Вы ввели пустое значение");
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        }
     }
 }
-
-
-//
-//if(users!=null)
-//        for(User i:listUser){
-//        if(nick.equals(i.getNick())&&password.equals(i.getPassword())){
-//        req.getServletContext().setAttribute("nickname",nick);
-//        req.getRequestDispatcher("/forum").forward(req,resp);
-//        }
-//        }else{
-//        String error="Ощибка авторизации!!!";
-//        req.getServletContext().setAttribute("error",error);
-//        req.getRequestDispatcher("index.jsp").forward(req,resp);
-//        }

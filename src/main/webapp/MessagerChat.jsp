@@ -35,8 +35,8 @@
 <script>
     var timerId = setTimeout(function tick() {
         $('#chat_id').submit();
-        timerId = setTimeout(tick, 5000);
-    }, 5000);
+        timerId = setTimeout(tick, 10000);
+    }, 10000);
 </script>
 <form id="chat_id" action="forum" method="post">
     <input id="messageparam" type="text" name="messageParam">

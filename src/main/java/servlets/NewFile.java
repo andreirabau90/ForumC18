@@ -8,7 +8,7 @@ public class NewFile {
 
     public static File usersFile() throws IOException {
         ClassLoader classLoader = NewFile.class.getClassLoader();
-        File file = new File(String.valueOf(classLoader.getResourceAsStream("/UsersList.xml")));
+        File file = new File(String.valueOf(classLoader.getResourceAsStream("MY!!!!.xml")));
         if (!file.exists()) {
             file.createNewFile();
         }
