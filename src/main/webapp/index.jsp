@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>NickName</title>
+    <title>Кegistration</title>
 </head>
 <body>
 <form action="check" >
@@ -16,7 +16,7 @@
     <input type="password" placeholder="password" name="pass">
     <input type="hidden" placeholder="password" name="checkpass" value="null">
     <input type="hidden" value="allChat" name="thisGroup">
-    <input type="submit" value="send" >
+    <input type="submit" value="to come in" >
 </form>
 <form action="Register.jsp">
     <input type="submit" value="register" >

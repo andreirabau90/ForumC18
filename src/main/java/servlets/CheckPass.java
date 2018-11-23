@@ -7,24 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.sun.org.apache.xerces.internal.utils.SecuritySupport.getResourceAsStream;
 
 @WebServlet({"/check"})
 public class CheckPass extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, NullPointerException {
-NewFile.usersFile();
-        File file = new File("C:\\Users\\Андрей\\ForumC18\\ForumC18\\src\\main\\resources\\UsersList.xml");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
         String nick = req.getParameter("nickname");
         String password = req.getParameter("pass");
         String checkPass = req.getParameter("checkpass");
@@ -34,14 +24,13 @@ NewFile.usersFile();
         try {
             JAXBContext uncontext = JAXBContext.newInstance(Users.class);
             Unmarshaller unmarshaller = uncontext.createUnmarshaller();
-            users = (Users) unmarshaller.unmarshal(file);
+            users = (Users) unmarshaller.unmarshal(MyFile.myFile());
         } catch (JAXBException e) {
             e.printStackTrace();
         }
         listUser = users.getUsersList();
-        if (!(nick.trim().length()==0||password.trim().length()==0)) {
+        if (!(nick.trim().length() == 0 || password.trim().length() == 0)) {
             String error = "Ошибка авторизации";
-            System.out.println(error.length());
             if (checkPass.equals("null")) {
                 for (User user : listUser) {
                     if (nick.equals(user.getNick()) && password.equals(user.getPassword())) {
@@ -74,7 +63,7 @@ NewFile.usersFile();
             }
             req.getServletContext().setAttribute("error", error);
             req.getRequestDispatcher("index.jsp").forward(req, resp);
-        }else {
+        } else {
             req.getServletContext().setAttribute("error", "Вы ввели пустое значение");
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }

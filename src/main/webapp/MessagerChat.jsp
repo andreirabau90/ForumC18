@@ -45,32 +45,6 @@
     <input id="1" type="submit" value="send">
 </form>
 
-<%--<script>--%>
-    <%--$('#1').click(function () {--%>
-        <%--$.ajax({--%>
-            <%--type: "POST",--%>
-            <%--url: "/forum",--%>
-            <%--data: {name: 'Andrey'},--%>
-            <%--success: function (dat) {--%>
-                <%--alert('1');--%>
-                <%--alert('2');--%>
-                <%--for (i = 0; i < dat.length; i++) {--%>
-                    <%--alert('3');--%>
-                    <%--result = '<td><c:out value="${message.author}"/></td>' +--%>
-                        <%--'<td><c:out value="${message.text}"/></td>' +--%>
-                        <%--' <td><c:out value="${message.dateForum}"/></td>';--%>
-                    <%--result = message[i];--%>
-                    <%--$('#2').html($('#2')).html() + result;--%>
-
-                <%--}--%>
-                <%--;--%>
-            <%--}--%>
-        <%--});--%>
-    <%--});--%>
-
-<%--</script>--%>
-
-
 <form action="forum" method="post">
     <h3>название всех групп</h3>
     <table>
